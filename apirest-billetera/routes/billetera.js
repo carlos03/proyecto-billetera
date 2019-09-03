@@ -5,10 +5,15 @@ var saldo = 100;
 
 router.post('/agregar/saldo',(req,res)=>{
     let monto = req.body.monto;
-    res.status(200).json({
-        monto  : saldo + monto
-
-    });
+    if(monto instanceof Number){
+        saldo += monto ;
+        res.status(200).json({
+            monto  : saldo
+    
+        });
+    }else{
+        res.send("Debe ingresar solo numeros");
+    }
 
 });
 
