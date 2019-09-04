@@ -17,11 +17,11 @@ describe('Pruebas de ingresos',function(){
             done();            
         });
     });
-    it("Con saldo 90 disminuyo 50 debo esperar 40",function(done){
+    it("Envio monto vacio eseprando respuesta una excepcion",function(done){
         let monto = 50;
         request.post("http://localhost:3000/billetera/descontar/saldo",
         {
-            json:{"monto":monto}
+            json:{"monto":""}
         },
         (error,res,body)=>{
             expect(body.saldo).to.equal(saldoActual - monto);
