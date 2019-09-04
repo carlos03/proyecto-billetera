@@ -1,25 +1,29 @@
 <html>
     <header>
         <title>Billetera</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="./javascripts/operador.js"></script>
     </header>
     <body>
         <h1>Billetera</h1>
-        <span name="saldo">Bs. 100 </span>
-        <hr>
-        <button name="aumentar">Agregar Saldo</button>
-        <hr>
-        <table>
-            <td>
-                <tr>
-                    col1
-                </tr>
-                <tr>
-                    col2
-                </tr>
-                <tr>
-                    col3
-                </tr>
-            </td>
+        <span name="saldo">Saldo Actual = Bs. 100 </span>
+        <br>
+        <input type="number" >
+        <button name="aumentar" type="button" class="btn btn-primary">Agregar Saldo</button>
+        <br >
+        <input type="number" style="margin-top: 10px;">
+        <button name="aumentar" type="button" class="btn btn-primary">Descontar Saldo</button>
+        <br>
+        <table name="movimiento" class="table">
+            <tr name="titulos">
+                <td scope="col">
+                    <h4>Descripcion</h4>
+                </td>
+                <td scope="col">
+                    <h4>Monto</h4>
+                </td>
+            </tr>
         </table>
     </body>
 </html>

@@ -1,17 +1,35 @@
 var expect  = require('chai').expect;
 var request = require('request');
-describe('demo unit test',function(){
-    it('Prueba hola mundo',function(done){
-        request('http://localhost:3000/billetera/prueba',function(error,res,body){
-            expect(body).to.equal("hola mundo");
-            done();
-        })
-    })
 
-    it('Prueba hola mundo vacio',function(done){
-        request('http://localhost:3000/billetera/prueba',function(error,res,body){
-            expect(body).to.equal("");
+describe('Pruebas de ingresos',function(){
+    var saldoActual = 0;
+
+    it("Aumento un monto X y el resultado debe ser saldoActual + monto", function(done){
+        let monto=100;
+        request.post("http://localhost:3000/billetera/agregar/saldo",
+        {
+            json:{"monto":monto}
+        },
+        function(error,res,body){
+            console.log(body);
+            expect(body.saldo).to.equal(saldoActual + monto);
+            saldoActual = body.saldo;
+            done();            
+        });
+    });
+    it("Con saldo 90 disminuyo 50 debo esperar 40",function(done){
+        let monto = 50;
+        request.post("http://localhost:3000/billetera/descontar/saldo",
+        {
+            json:{"monto":monto}
+        },
+        (error,res,body)=>{
+            expect(body.saldo).to.equal(saldoActual - monto);
             done();
-        })
-    })
-})
+        });
+        
+    });
+});
+
+
+// "test": "nodemon ./node_modules/.bin/mocha --reporter spec"
