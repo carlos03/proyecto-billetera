@@ -1,15 +1,15 @@
 var express = require('express');
 var router = express.Router();
 
+var saldoAnterior = 0;
 var saldo = 876;
 
 var listaTransaccion = [
-    {descripcion: "Ingreso","monto":saldo},
+    {descripcion: "Ingreso "+saldo,"monto":saldo},
 ];
 
 router.get('/consultar/saldo',(req,res)=>{
     res.json({"saldo":saldo});
-
 });
 
 router.post('/agregar/saldo',(req,res)=>{
@@ -21,8 +21,9 @@ router.post('/agregar/saldo',(req,res)=>{
     if(monto <= 0){
         return res.status(400).send({"error":"El monto ingresado debe ser mayor a cero"});
     }
+    saldoAnterior = saldo;
     saldo +=  monto ;
-    return res.status(200).json({"saldo":saldo, "descripcion": "Ingreso","monto":monto});
+    return res.status(200).json({"saldo":saldo,"saldoAnterior":saldoAnterior, "descripcion": "Ingreso "+monto,"monto":monto});
 
 });
 
@@ -39,8 +40,9 @@ router.post('/descontar/saldo',(req,res)=>{
     if(monto > saldo){
         return res.status(400).send({"error":"El monto ingresado no debe ser mayor al saldo"});
     }
+    saldoAnterior = saldo;
     saldo -= monto;
-    return res.status(200).json({"saldo":saldo,"descripcion": "Egreso","monto":monto});
+    return res.status(200).json({"saldo":saldo,"saldoAnterior":saldoAnterior,"descripcion": "Retiro "+monto,"monto":monto});
 });
 
 

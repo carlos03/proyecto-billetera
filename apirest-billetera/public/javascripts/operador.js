@@ -26,11 +26,11 @@ function agregarSaldo(){
         return;
     }
     $.post("http://localhost:3000/billetera/agregar/saldo",{"monto":monto})
-    .done((result)=>{
-        console.log(result);
+    .done((err,res,result)=>{
+        console.log(res,result);
         selectorAgregar.val("");
-        actualizarSaldo(result);
-        agregarFilaTransaccion(result);
+        actualizarSaldo(result.responseJSON);
+        agregarFilaTransaccion(result.responseJSON);
     })
     .fail((error)=>{
         console.log(error.responseJSON.error);
