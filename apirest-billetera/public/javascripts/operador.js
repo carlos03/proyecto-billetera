@@ -17,19 +17,25 @@ function detalleIngresoSalidaSaldo(){
 
 function agregarSaldo(){
     limpiarMensajeExcepcion();
-    let selectorDescontar = $('[name="input-aumentar"]');
-    let monto = selectorDescontar.val();
+    let selectorAgregar = $('[name="input-aumentar"]');
+    let monto = selectorAgregar.val();
     console.log(monto);
     if(monto === "" || isNaN(monto) || monto === undefined){
         mostrarExcepcion("Debe Ingresar solo numeros");
+        selectorAgregar.val("");
         return;
     }
-    $.post("http://localhost:3000/billetera/descontar/saldo",{"monto":monto})
+    $.post("http://localhost:3000/billetera/agregar/saldo",{"monto":monto})
     .done((result)=>{
-
+        console.log(result);
+        selectorAgregar.val("");
+        actualizarSaldo(result);
+        agregarFilaTransaccion(result);
     })
     .fail((error)=>{
-
+        console.log(error.responseJSON.error);
+        selectorAgregar.val("");
+        mostrarExcepcion(error.responseJSON.error)
     });
 }
 
@@ -40,6 +46,7 @@ function descontarSaldo(){
     console.log(monto);
     if(monto === "" || isNaN(monto) || monto === undefined){
         mostrarExcepcion("Debe Ingresar solo numeros");
+        selectorDescontar.val("");
         return;
     }
     $.post("http://localhost:3000/billetera/descontar/saldo",{"monto":monto})

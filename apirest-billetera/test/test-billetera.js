@@ -29,6 +29,7 @@ describe('Prueba de egreso',function(){
             json:{"monto":monto}
         },
         (error,res,body)=>{
+            console.log(error,res,body);
             expect(body.saldo).to.equal(saldoActual - monto);
             done();
         });

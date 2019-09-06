@@ -4,7 +4,7 @@ var router = express.Router();
 var saldo = 876;
 
 var listaTransaccion = [
-    {descripcion: "Ingreso",monto:876},
+    {descripcion: "Ingreso","monto":saldo},
 ];
 
 router.get('/consultar/saldo',(req,res)=>{
@@ -13,13 +13,13 @@ router.get('/consultar/saldo',(req,res)=>{
 });
 
 router.post('/agregar/saldo',(req,res)=>{
-    let monto = req.body.monto;
+    let monto = parseInt(req.body.monto);
     console.log(req.body);
     if(typeof monto != 'number'){        
-        return res.status(400).json({"error":"Debe ingresar solo numeros"});
+        return res.status(400).send({"error":"Debe ingresar solo numeros [0-9]"});
     }
-    if(monto <=0){
-        return res.status(400).json({"error":"El monto ingresado debe ser mayor a cero"});
+    if(monto <= 0){
+        return res.status(400).send({"error":"El monto ingresado debe ser mayor a cero"});
     }
     saldo +=  monto ;
     return res.status(200).json({"saldo":saldo, "descripcion": "Ingreso","monto":monto});
@@ -31,7 +31,7 @@ router.post('/descontar/saldo',(req,res)=>{
     let monto = parseInt(req.body.monto);
     // let descripcion = req.body.descripcion;
     if(typeof monto != 'number'){
-        return res.status(400).send({"error":"Debe ingresar solo numeros"});
+        return res.status(400).send({"error":"Debe ingresar solo numeros [0-9]"});
     }
     if(monto <= 0 ){
         return res.status(400).send({"error":"El monto ingresado debe ser mayor a cero"});
