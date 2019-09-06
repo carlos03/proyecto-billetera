@@ -1,11 +1,11 @@
 var expect  = require('chai').expect;
 var request = require('request');
+var saldoActual = 876;
 
 describe('Pruebas de ingresos',function(){
-    var saldoActual = 0;
-
-    it("Aumento un monto X y el resultado debe ser saldoActual + monto", function(done){
-        let monto=100;
+    let monto=100;
+    it("Aumento un monto 100 y el resultado debe ser saldoActual + monto", function(done){
+        
         request.post("http://localhost:3000/billetera/agregar/saldo",
         {
             json:{"monto":monto}
@@ -17,11 +17,16 @@ describe('Pruebas de ingresos',function(){
             done();            
         });
     });
-    it("Envio monto vacio eseprando respuesta una excepcion",function(done){
+    
+});
+
+describe('Prueba de egreso',function(){
+    let monto=12;
+    it("Envio monto X el resultado deberia ser saldoActual - X",function(done){
         let monto = 50;
         request.post("http://localhost:3000/billetera/descontar/saldo",
         {
-            json:{"monto":""}
+            json:{"monto":monto}
         },
         (error,res,body)=>{
             expect(body.saldo).to.equal(saldoActual - monto);
@@ -29,7 +34,7 @@ describe('Pruebas de ingresos',function(){
         });
         
     });
-});
+})
 
 
 // "test": "nodemon ./node_modules/.bin/mocha --reporter spec"

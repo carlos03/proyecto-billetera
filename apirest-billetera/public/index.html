@@ -1,21 +1,23 @@
 <html>
     <header>
         <title>Billetera</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="./javascripts/operador.js"></script>
     </header>
     <body>
-        <h1>Billetera</h1>
-        <span name="saldo">Saldo Actual = Bs. 100 </span>
-        <br>
-        <input type="number" >
+        <div class="container">
+        <center><h1>Billetera</h1></center>
+        <center><h3><b><span name="saldo"> </span></b></h3></center>
+        <input name="input-aumentar" type="number" >
         <button name="aumentar" type="button" class="btn btn-primary">Agregar Saldo</button>
-        <br >
-        <input type="number" style="margin-top: 10px;">
-        <button name="aumentar" type="button" class="btn btn-primary">Descontar Saldo</button>
+        <input name="input-descontar" type="number" style="margin-top: 10px;">
+        <button name="btn-descontar" type="button" onclick="descontarSaldo()" class="btn btn-primary">Descontar Saldo</button>
+        <br>        
         <br>
-        <table name="movimiento" class="table">
+        <p name="mensaje-warning" class="text-warning"></p>
+        <table id="tabla-transaccion" name="transacciones" class="table">
             <tr name="titulos">
                 <td scope="col">
                     <h4>Descripcion</h4>
@@ -24,6 +26,12 @@
                     <h4>Monto</h4>
                 </td>
             </tr>
+            
         </table>
+        
+        </div>
+        <script>
+            
+            </script>
     </body>
 </html>
