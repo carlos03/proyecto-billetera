@@ -15,6 +15,24 @@ function detalleIngresoSalidaSaldo(){
     });
 }
 
+function agregarSaldo(){
+    limpiarMensajeExcepcion();
+    let selectorDescontar = $('[name="input-aumentar"]');
+    let monto = selectorDescontar.val();
+    console.log(monto);
+    if(monto === "" || isNaN(monto) || monto === undefined){
+        mostrarExcepcion("Debe Ingresar solo numeros");
+        return;
+    }
+    $.post("http://localhost:3000/billetera/descontar/saldo",{"monto":monto})
+    .done((result)=>{
+
+    })
+    .fail((error)=>{
+
+    });
+}
+
 function descontarSaldo(){
     limpiarMensajeExcepcion();
     let selectorDescontar = $('[name="input-descontar"]');
