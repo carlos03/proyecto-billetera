@@ -17,7 +17,10 @@ Para el desarrolo del siguiente proyecto se utilizaron las siguintes tecnologias
 | apirest-billetera | /proyecto-billetera/apirest-billetera/ |
 | billetera-cucumber | /proyecto-billetera/billetera-cucumber/ |
 
-
+* *apirest-billetera*
+        Contiene las api implementas, las pruebas unitarias y un index.html 
+* *billetera-cucumber*
+        Contiene las dos pruebas de integracion y una de UI.
 
 ### Instalacion servicio rest y UI
 Ingrese al directorio y ejecute el siguiente comando para ejecutar el servicio. 
