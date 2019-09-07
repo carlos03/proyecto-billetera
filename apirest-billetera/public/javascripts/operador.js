@@ -25,9 +25,9 @@ function agregarSaldo(){
         selectorAgregar.val("");
         return;
     }
+    
     $.post("http://localhost:3000/billetera/agregar/saldo",{"monto":monto})
     .done((err,res,result)=>{
-        console.log(res,result);
         selectorAgregar.val("");
         actualizarSaldo(result.responseJSON);
         agregarFilaTransaccion(result.responseJSON);
@@ -87,8 +87,3 @@ function limpiarMensajeExcepcion(){
     let selectorWarning = $('[name="mensaje-warning"]');
     selectorWarning.text("");
 }
-
-// $( document ).ready(function() {
-//     obtenerSaldo();
-//     detalleIngresoSalidaSaldo();
-// });

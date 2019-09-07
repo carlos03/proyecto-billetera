@@ -25,8 +25,6 @@ describe('Pruebas de ingreso y egreso a la billetera',  function(){
         });
                
     });
-
-    
     
     it("Envio un monto vacio para aumentar y el resultado es un status 400",async function(){
         let montoAumentar = "";
