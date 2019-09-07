@@ -2,22 +2,26 @@ var express = require('express');
 var router = express.Router();
 
 var saldoAnterior = 0;
-var saldo = 876;
+var saldo = 0;
 
 var listaTransaccion = [
-    {descripcion: "Ingreso "+saldo,"monto":saldo},
+    // {descripcion: "Ingreso "+saldo,"monto":saldo},
 ];
 
 router.get('/consultar/saldo',(req,res)=>{
-    res.json({"saldo":saldo});
+    return res.status(200).json({saldo: saldo });
 });
 
 router.post('/agregar/saldo',(req,res)=>{
-    let monto = parseInt(req.body.monto);
-    console.log(req.body);
-    if(typeof monto != 'number'){        
-        return res.status(400).send({"error":"Debe ingresar solo numeros [0-9]"});
+    let monto = req.body.monto;
+    console.log(monto);
+    if(typeof monto != 'number'){ 
+        monto = parseInt(req.body.monto);
+        if(isNaN(monto)){
+            return res.status(400).send({"error":"Debe ingresar solo numeros [0-9]"});
+        }
     }
+
     if(monto <= 0){
         return res.status(400).send({"error":"El monto ingresado debe ser mayor a cero"});
     }
@@ -29,15 +33,19 @@ router.post('/agregar/saldo',(req,res)=>{
 
 router.post('/descontar/saldo',(req,res)=>{
     console.log(req.body);
-    let monto = parseInt(req.body.monto);
+    let monto = req.body.monto;
     // let descripcion = req.body.descripcion;
     if(typeof monto != 'number'){
-        return res.status(400).send({"error":"Debe ingresar solo numeros [0-9]"});
+        monto = parseInt(req.body.monto);
+        if(isNaN(monto)){
+            return res.status(400).send({"error":"Debe ingresar solo numeros [0-9]"});
+        }
     }
     if(monto <= 0 ){
         return res.status(400).send({"error":"El monto ingresado debe ser mayor a cero"});
     }
     if(monto > saldo){
+        console.log("monto mayor a descontar")
         return res.status(400).send({"error":"El monto ingresado no debe ser mayor al saldo"});
     }
     saldoAnterior = saldo;

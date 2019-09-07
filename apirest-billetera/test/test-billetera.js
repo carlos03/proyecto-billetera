@@ -1,68 +1,98 @@
 var expect  = require('chai').expect;
 var request = require('request');
-// var request = require('axios');
 
-var saldoActual = undefined;
-
-describe("Consulta de Saldo",  function(){
-    let monto = 50;
+describe('Pruebas de ingreso y egreso a la billetera',  function(){
     
-    it("Aumento un monto "+monto+" y el resultado OK", async function(){
-        
-        // await request.post("http://localhost:3000/billetera/agregar/saldo",{
-        //     "monto":monto
-        // })
-        // .then(response=>{
-        //     expect(response.statusText).to.equal("OK");
-        // })
-        // .catch(err=>{
+    it("Dado que ingrese monto de 50 envio monto 45 para descontar el resultado deberia ser 5", function(done){
+        let montoDescontar = 45;
+        let montoAumentar = 50;
+        let saldo = 5
+        request({
+            method : "POST",
+            uri:"http://localhost:3000/billetera/agregar/saldo",
+            json:true,
+            body:{"monto":montoAumentar}
+        },function(error,response,body){            
+            request({
+                method : "POST",
+                uri:"http://localhost:3000/billetera/descontar/saldo",
+                json:true,
+                body:{"monto":montoDescontar}
+            },function(error,response,body){
+                expect(body.saldo).to.equal(saldo);
+                done();
+            });
+        });
+               
+    });
 
-        // });
-
+    
+    
+    it("Envio un monto vacio para aumentar y el resultado es un status 400",async function(){
+        let montoAumentar = "";
+        let status = 400;
         await request({
             method : "POST",
             uri:"http://localhost:3000/billetera/agregar/saldo",
             json:true,
-            body:{"monto":monto}
-        })
-        .then((body)=>{
-            console.log(status,body);
-            expect(body.saldo).to.equal("OK");
-            saldoActual = body.saldo;
-                       
-        })
-        .catch((error)=>{
-
+            body:{"monto":""}   
+        },function(error,response,body){
+            expect(response.statusCode).to.eql(status);
         });
     });
-    monto = ""
-    it("Envio monto "+monto+" el resultado deberia ser saldoActual - X",async function(){
-        // await request.post("http://localhost:3000/billetera/descontar/saldo",{
-        //     "monto":monto
-        // })
-        // .then(response=>{
-        //     let saldoAnterior = response.data.saldoAnterior;
-        //     expect(response.saldo).to.equal(saldoAnterior);
-        // })
-        // .catch(err=>{
 
-        // });
+    it("Envio un monto con signo negativo(-45) para aumentar y el resultado es un status 400",async function(){
+        let montoAumentar = -45;
+        let status = 400;
+        await request({
+            method : "POST",
+            uri:"http://localhost:3000/billetera/agregar/saldo",
+            json:true,
+            body:{"monto":montoAumentar}   
+        },function(error,response,body){
+            expect(response.statusCode).to.eql(status);
+        });
+    });
+
+    it("Envio un monto mayor al saldo para descontar (500) y el resultado es un status 400",async function(){
+        let montoDescontar = 500;
+        let status = 400;
         await request({
             method : "POST",
             uri:"http://localhost:3000/billetera/descontar/saldo",
             json:true,
-            body:{"monto":monto}
-        })
-        .then((err,response,body)=>{
-            // console.log(response);
-            expect(body.saldo).to.equal(saldoActual - monto);
-            
-        })
-        .catch(err=>{
-            // console.log(err);
+            body:{"monto":montoDescontar}   
+        },function(error,response,body){
+            expect(response.statusCode).to.eql(status);
         });
-        
     });
+
+    it("Envio un el monto 500 para aumentar el servicio respondera status 200",async function(){
+        let montoAumentar = 500;
+        let status = 200;
+        await request({
+            method : "POST",
+            uri:"http://localhost:3000/billetera/agregar/saldo",
+            json:true,
+            body:{"monto":montoAumentar}  
+        },function(error,response,body){
+            expect(response.statusCode).to.eql(status);
+        })
+    });
+
+    it("Dado que ya ingrese un monto de 500 envio un monto menor al saldo para descontar 100 y el resultado es un status 200",async function(){
+        let montoDescontar = 100;
+        let status = 200;
+        await request({
+            method : "POST",
+            uri:"http://localhost:3000/billetera/descontar/saldo",
+            json:true,
+            body:{"monto":montoDescontar}   
+        },function(error,response,body){
+            expect(response.statusCode).to.eql(status);
+        });
+    });
+
 });
 
 

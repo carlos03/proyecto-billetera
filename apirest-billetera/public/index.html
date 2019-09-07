@@ -2,17 +2,17 @@
     <header>
         <title>Billetera</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="./javascripts/operador.js"></script>
     </header>
     <body>
         <div class="container">
-        <center><h1>Billetera</h1></center>
-        <center><h3><b><span name="saldo"> </span></b></h3></center>
-        <input name="input-aumentar" type="number" >
+        <center><h1>Billetera</h1>
+        <center><h3><b><span>Saldo Actual Bs. </span><span name="saldo"> </span></b></h3></center>
+        <input name="input-aumentar" type="number" placeholder="Agregar Monto">
         <button name="aumentar" type="button" onclick="agregarSaldo()" class="btn btn-primary">Agregar Saldo</button>
-        <input name="input-descontar" type="number" style="margin-top: 10px;">
+        <input name="input-descontar" type="number" style="margin-top: 10px;" placeholder="Descontar Monto">
         <button name="btn-descontar" type="button" onclick="descontarSaldo()" class="btn btn-primary">Descontar Saldo</button>
         <br>        
         <br>
@@ -23,13 +23,17 @@
                     <h4>Descripcion</h4>
                 </td>
                 <td scope="col">
-                    <h4>Monto</h4>
+                    <h4>Movimiento</h4>
+                </td>
+                <td>
+                    <h4>Saldo</h4>
                 </td>
             </tr>
             
         </table>
         
         </div>
+    </center>
         <script>
             
             </script>

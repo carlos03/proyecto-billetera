@@ -66,13 +66,15 @@ function descontarSaldo(){
 
 function agregarFilaTransaccion(transaccion){
 
-    let row = `<tr><td>${transaccion.descripcion}</td><td>${transaccion.monto}</td></tr>`;
+    let row = `<tr><td>${transaccion.descripcion}</td><td>
+    ${transaccion.monto}</td><td>${transaccion.saldo}</td></tr>`;
+
     let selectoTabla = $('#tabla-transaccion');
     selectoTabla.append(row);
 }
 function actualizarSaldo(result){
     let selector = $('[name="saldo"]');
-        selector.text("Saldo Actual Bs. "+result.saldo);
+        selector.text(result.saldo);
 }
 
 function mostrarExcepcion(mensaje){
@@ -86,7 +88,7 @@ function limpiarMensajeExcepcion(){
     selectorWarning.text("");
 }
 
-$( document ).ready(function() {
-    obtenerSaldo();
-    detalleIngresoSalidaSaldo();
-});
+// $( document ).ready(function() {
+//     obtenerSaldo();
+//     detalleIngresoSalidaSaldo();
+// });
