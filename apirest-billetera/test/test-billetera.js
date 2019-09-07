@@ -3,29 +3,6 @@ var request = require('request');
 
 describe('Pruebas de ingreso y egreso a la billetera',  function(){
     
-    it("Dado que ingrese monto de 50 envio monto 45 para descontar el resultado deberia ser 5", function(done){
-        let montoDescontar = 45;
-        let montoAumentar = 50;
-        let saldo = 5
-        request({
-            method : "POST",
-            uri:"http://localhost:3000/billetera/agregar/saldo",
-            json:true,
-            body:{"monto":montoAumentar}
-        },function(error,response,body){            
-            request({
-                method : "POST",
-                uri:"http://localhost:3000/billetera/descontar/saldo",
-                json:true,
-                body:{"monto":montoDescontar}
-            },function(error,response,body){
-                expect(body.saldo).to.equal(saldo);
-                done();
-            });
-        });
-               
-    });
-    
     it("Envio un monto vacio para aumentar y el resultado es un status 400",async function(){
         let montoAumentar = "";
         let status = 400;
