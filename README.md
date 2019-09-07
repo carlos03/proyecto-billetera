@@ -1,5 +1,5 @@
 # MÓDULO 3 – PRUEBAS DE SOFTWARE – QTESTING
-### Descripcion poryecto Final
+### Descripcion proyecto Final
 Proyecto final modulo 3 implementacion de todos los niveles de prueba en el diagrama piramidal
 
 
