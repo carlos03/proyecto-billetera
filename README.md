@@ -33,6 +33,7 @@ Luego en su navegador ingrese la siguiente direccion para visualizar el UI de la
 ```sh
 http://localhost:3000/
 ```
+![ui](https://github.com/carlos03/proyecto-billetera/blob/master/anexos/ui-billetera.JPG)
 
 ### Ejecutar Test del servicio rest
 
@@ -45,6 +46,7 @@ Ejecute
 ```sh
 npm test
 ```
+![unit-test](https://github.com/carlos03/proyecto-billetera/blob/master/anexos/prueba-unitaria.JPG)
 
 ### Instalar y ejecutar cucumber js
 
@@ -54,6 +56,8 @@ cd /proyecto-billetera/billetera-cucumber/
 npm install
 ./node_modules/.bin/cucumber-js
 ```
+
+![unit-test](https://github.com/carlos03/proyecto-billetera/blob/master/anexos/test-intregacion-cucumber-js.JPG)
 
 
 [node.js]: <http://nodejs.org>
