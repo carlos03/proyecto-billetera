@@ -19,9 +19,11 @@ let respuesta=undefined;
         })
         .then(function(response){
             respuesta = response;
+            return;
         })
         .catch(error=>{
             respuesta = error;
+            return;
         });
     });
     Then('recibo un status {int}', function (status) {

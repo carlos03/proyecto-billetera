@@ -4,6 +4,6 @@ Feature: Descontar Saldo
 
    Scenario: Realizar una peticion POST para descontar el saldo
 
-   Given el saldo es 0 intento descontar el monto Bs. 1000
+   Given el saldo es 0 intento descontar el monto Bs. 1000000
    When realizo la peticion POST para descontar el saldo
    Then un mensaje "El monto ingresado no debe ser mayor al saldo"

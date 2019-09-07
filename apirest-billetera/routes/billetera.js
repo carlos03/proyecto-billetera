@@ -4,9 +4,7 @@ var router = express.Router();
 var saldoAnterior = 0;
 var saldo = 0;
 
-var listaTransaccion = [
-    // {descripcion: "Ingreso "+saldo,"monto":saldo},
-];
+var listaTransaccion = [];
 
 router.get('/consultar/saldo',(req,res)=>{
     return res.status(200).json({saldo: saldo });
@@ -34,7 +32,6 @@ router.post('/agregar/saldo',(req,res)=>{
 router.post('/descontar/saldo',(req,res)=>{
     console.log(req.body);
     let monto = req.body.monto;
-    // let descripcion = req.body.descripcion;
     if(typeof monto != 'number'){
         monto = parseInt(req.body.monto);
         if(isNaN(monto)){

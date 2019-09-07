@@ -2,34 +2,32 @@ const { Given, When, Then } = require('cucumber')
 const { expect } = require('chai')
 const httpClient = require('request-promise')
 
-// let monto =0;
-// let respuesta=undefined;
-
+let montoDescuento = 0;
+let respuesta = undefined;
 
 Given('el saldo es {int} intento descontar el monto Bs. {int}', function (saldo, montoDescontar) {
-    // monto = montoDescontar;
-    this.setToMonto(montoDescontar);
+    montoDescuento = montoDescontar;
 });
 
 When('realizo la peticion POST para descontar el saldo', async function () {
-    let _this = this;
+    
     await httpClient({
         method: 'POST',
         uri: 'http://localhost:3000/billetera/descontar/saldo',
         json: true,
-        body: {"monto": this.montoDescuento},
+        body: {"monto": montoDescuento},
         resolveWithFullResponse: true
     })
     .then(function(response){
-        _this.setCode(response.statusCode);
+        respuesta = response;
+        return;
     })
     .catch(error=>{
-        console.log(error.statusCode);
-        _this.setCode(error.statusCode);
-        _this.setToMensajeError(error.error.error);
+        respuesta = error;
+        return;
     })
 });
 
 Then('un mensaje {string}', function (mensajeError) {
-    expect(this.mensajeError).to.equal(mensajeError);
+    expect(respuesta.error.error).to.equal(mensajeError);
 });
